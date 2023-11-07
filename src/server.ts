@@ -6,7 +6,7 @@ AppDataSource.initialize()
     console.log('Server is running');
 
     const PORT: number = Number(process.env.PORT) || 3000;
-    app.listen(PORT, () => console.log('Servidor executando'));
+    app.listen(PORT, (): void => console.log(`App is running art port ${PORT}`));
   })
   .catch((err: unknown): void => {
     console.error('Error during Data Source initialization', err);
