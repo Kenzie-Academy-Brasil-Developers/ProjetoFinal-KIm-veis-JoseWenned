@@ -56,7 +56,7 @@ export const verifyUserScheduleExists = async (req:Request, res: Response, next:
         }
     });
 
-    if(schedule) throw new AppError("User schedule to this realEstate at this date and time already exists", 409);
+    if(schedule) throw new AppError("User schedule to this realEstate at this date and time already exists.", 409);
 
     return next();
 

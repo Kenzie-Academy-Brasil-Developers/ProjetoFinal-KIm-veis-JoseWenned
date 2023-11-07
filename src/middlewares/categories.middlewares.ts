@@ -11,7 +11,7 @@ export const verifyUniqueCategoryName = async (req:Request, res: Response, next:
         name
     })
 
-    if(category) throw new AppError("Category already exists", 409);
+    if(category) throw new AppError("Category already exists.", 409);
 
     return next();
 
@@ -25,7 +25,7 @@ export const verifyCategoryExists = async (req:Request, res: Response, next: Nex
         id: Number( id )
     });
 
-    if(!category) throw new AppError("Category not found", 404);
+    if(!category) throw new AppError("Category not found.", 404);
 
     return next();
 
