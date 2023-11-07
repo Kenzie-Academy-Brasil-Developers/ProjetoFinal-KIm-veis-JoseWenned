@@ -1,7 +1,16 @@
 import { Router } from "express";
+import { verifyAdmin, verifyToken } from "../middlewares/global.middlewares";
+import { verifyCategoryExists, verifyUniqueCategoryName } from "../middlewares/categories.middlewares";
 
 export const categoriesRouter: Router = Router()
 
-categoriesRouter.post("/");
+categoriesRouter.post("/",
+
+    verifyToken,
+    verifyUniqueCategoryName,
+    verifyAdmin
+
+);  
+
 categoriesRouter.get("/");
-categoriesRouter.get("/:id/realEstate");
+categoriesRouter.get("/:id/realEstate", verifyCategoryExists);
