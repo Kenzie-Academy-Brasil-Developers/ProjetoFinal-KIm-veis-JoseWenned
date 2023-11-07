@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-export const scheduleRouter: Router = Router()
+export const schedulesRouter: Router = Router()
 
-scheduleRouter.post("/");
-scheduleRouter.get("/realEstate/:id");
+schedulesRouter.post("/");
+schedulesRouter.get("/realEstate/:id");

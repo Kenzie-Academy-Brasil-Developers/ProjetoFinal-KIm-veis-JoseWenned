@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-export const userRouter: Router = Router()
+export const usersRouter: Router = Router()
 
-userRouter.post("/");
-userRouter.get("/");
-userRouter.patch("/:id");
-userRouter.delete("/:id");
+usersRouter.post("/");
+usersRouter.get("/");
+usersRouter.patch("/:id");
+usersRouter.delete("/:id");
