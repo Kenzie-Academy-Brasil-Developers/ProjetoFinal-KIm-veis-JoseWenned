@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { verifyAdmin, verifyToken } from "../middlewares/global.middlewares";
+import { verifyAdmin, verifyToken } from "../middlewares/globals.middlewares";
 import { verifyCategoryExists, verifyUniqueCategoryName } from "../middlewares/categories.middlewares";
 
 export const categoriesRouter: Router = Router()

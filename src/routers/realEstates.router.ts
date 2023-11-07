@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { verifyAdmin, verifyBody, verifyToken } from "../middlewares/global.middlewares";
+import { verifyAdmin, verifyBody, verifyToken } from "../middlewares/globals.middlewares";
 import { verifyAdressExists } from "../middlewares/realEstates.middlewares";
 
 export const realEstatesRouter: Router = Router()
