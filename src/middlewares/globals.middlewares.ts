@@ -16,7 +16,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction): vo
 
     const { authorization } = req.headers;
 
-    if(!authorization) throw new AppError("Missing bearer token", 401);
+    if(!authorization) throw new AppError("Missing bearer token.", 401);
 
     const token: string = authorization.split(" ")[1];
 
@@ -32,7 +32,7 @@ export const verifyAdmin = (req: Request, res: Response, next: NextFunction): vo
 
     const { admin } = res.locals.decoded;
 
-    if(!admin) throw new AppError("Insufficient permissions", 403);
+    if(!admin) throw new AppError("Insufficient permissions.", 403);
 
     return next();
 
@@ -46,7 +46,7 @@ export const verifyPermissions = (req: Request, res: Response, next: NextFunctio
 
     if(admin) return next(); 
     
-    if(id !== sub) throw new AppError("Insufficient permissions", 409);
+    if(id !== sub) throw new AppError("Insufficient permissions.", 409);
     
     return next();
 
