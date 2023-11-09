@@ -1,7 +1,9 @@
-import { Category, RealEstate, Schedule } from "./entities/index.entities";
+import  Category  from "./entities/category.entities";
+import  RealEstate  from "./entities/realEstate.entities";
+import  Schedule  from "./entities/schedule.entities";
 import { AppDataSource } from "./data-source";
-import { Address } from "./entities/index.entities";
-import { User } from "./entities/index.entities";
+import  Address  from "./entities/address.entities";
+import  User  from "./entities/user.entities";
 import { ScheduleRepo } from "./interfaces/schedules.interface";
 import { AddressRepo, RealEstatesRepo } from "./interfaces/realEstates.interface"
 import { UserRepo } from "./interfaces/users.interfaces";

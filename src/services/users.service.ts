@@ -1,4 +1,4 @@
-import User from "../entities/user.entities";
+import  User  from "../entities/user.entities";
 import { UserCreate, UserReadReturn, UserReturn, UserUpdate } from "../interfaces/users.interfaces";
 import { usersRepo } from "../repositories";
 import { userReturnListSchema, userReturnSchema } from "../schemas/users.schema";

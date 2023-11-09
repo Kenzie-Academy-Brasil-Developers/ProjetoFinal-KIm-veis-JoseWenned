@@ -5,9 +5,11 @@ import Schedule from "./schedule.entities";
 import User from "./user.entities";
 
 export { 
-    User, 
-    Schedule, 
-    RealEstate,
+
     Address,
-    Category
-};
+    Category,
+    RealEstate,
+    User,
+    Schedule,
+    
+ }

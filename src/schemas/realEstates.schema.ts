@@ -5,17 +5,18 @@ export const realEstatesSchema = z.object({
     id: z.number().positive(),
     sold: z.boolean().default(false),
     value: z.number().or(z.string()).default(0),
-    size: z.number().int(),
-    createAt: z.string(),
-    updateAt: z.string(),
-    addresses: z.object({
+    size: z.number().int().positive(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
+    address: z.object({
         street: z.string().max(45),
         zipCode: z.string().max(8),
         number: z.number().int(),
         city: z.string().max(20),
+        state: z.string().max(2)
     }),
-    categoriesId: z.number().int().positive()
+    categoryId: z.number().int().positive()
     
 });
 
-export const createRealEstatesSchema = realEstatesSchema.omit({id: true, sold: true,createAt: true, updateAt: true, });
+export const createRealEstatesSchema = realEstatesSchema.omit({id: true, sold: true, createdAt: true, updatedAt: true, });

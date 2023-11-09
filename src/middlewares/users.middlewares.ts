@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { User } from "../entities/index.entities";
+import  User  from "../entities/user.entities";
 import { usersRepo } from "../repositories";
 import AppError from "../errors/AppError.error";
 
@@ -11,7 +11,7 @@ export const verifyUniqueUserEmail = async (req:Request, res: Response, next: Ne
         name
     })
 
-    if(user) throw new AppError("Email already exists.", 409);
+    if(user) throw new AppError("Email already exists", 409);
 
     return next();
 
@@ -25,7 +25,7 @@ export const verifyUserExists = async (req:Request, res: Response, next: NextFun
         id: Number( id )
     });
 
-    if(!user) throw new AppError("User not found.", 404);
+    if(!user) throw new AppError("User not found", 404);
 
     res.locals = { ...res.locals, user }
 

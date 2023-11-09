@@ -1,9 +1,9 @@
 import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import Schedule from "./schedule.entities";
+import  Schedule  from "./schedule.entities";
 import { getRounds, hashSync } from "bcryptjs";
 
 @Entity("users")
-class User {
+export default class User {
 
     @PrimaryGeneratedColumn("increment")
     id: number;
@@ -21,13 +21,13 @@ class User {
     password: string;
 
     @CreateDateColumn({ type: "date" })
-    createAt: string;
+    createdAt: string;
 
     @UpdateDateColumn({ type: "date" })
-    updateAt: string;
+    updatedAt: string;
 
     @DeleteDateColumn({ type: "date", nullable: true })
-    deleteAt: string | null;
+    deletedAt: string | null;
 
     @OneToMany(() => Schedule, (schedule) => schedule.users)
     schedules: Schedule[]
@@ -43,5 +43,3 @@ class User {
     };
 
 };
-
-export default User;
