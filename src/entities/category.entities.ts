@@ -1,8 +1,8 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import RealEstate from "./realEstate.entities";
+import  RealEstate  from "./realEstate.entities";
 
 @Entity("categories")
-class Category {
+export default class Category {
 
     @PrimaryGeneratedColumn("increment")
     id: number;
@@ -10,9 +10,8 @@ class Category {
     @Column({ length: 45, unique: true })
     name: string;
 
-    @OneToMany(() => RealEstate, (realEstate) => realEstate.categories)
-    realEstates: RealEstate[];
+    @OneToMany(() => RealEstate, (realEstate) => realEstate.category)
+    realEstate: RealEstate[];
 
 };
 
-export default Category;

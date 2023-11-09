@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { createNewScheduleSchema } from "../schemas/schedules.schema";
 import { Repository } from "typeorm";
-import { Schedule } from "../entities/index.entities";
+import  Schedule from "../entities/schedule.entities";
 
 export type CreateSchedule = z.infer<typeof createNewScheduleSchema>;
 

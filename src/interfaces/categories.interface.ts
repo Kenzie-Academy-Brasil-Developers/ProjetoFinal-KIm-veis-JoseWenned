@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { createCategorySchema, readAllCategoriesSchema } from "../schemas/categories.schema";
 import { Repository } from "typeorm";
-import Category from "../entities/category.entities";
+import  Category  from "../entities/category.entities";
 
 export type CreateCategory = z.infer<typeof createCategorySchema>;
 

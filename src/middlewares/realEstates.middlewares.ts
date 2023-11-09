@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { Address } from "../entities/index.entities";
+import  Address  from "../entities/address.entities";
 import { addressRepo } from "../repositories";
 import AppError from "../errors/AppError.error";
 
@@ -19,7 +19,7 @@ export const verifyAdressExists = async (req: Request, res: Response, next: Next
         }
     });
 
-    if(addressExists) throw new AppError("Address already exists.", 409);
+    if(addressExists) throw new AppError("Address already exists", 409);
 
     return next();
 
