@@ -1,0 +1,1026 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "CRUD the properties",
+        "description": "API responsible for managing properties for rent.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/api-documentation",
+            "description": "Development env"
+        }
+    ],
+    "paths": {
+        "/users": {
+            "get": {
+                "description": "Router responsible for searching all users register.",
+                "tags": ["Router without parameter"],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "value": [
+                                            {
+                                                "id": 1,
+                                                "name": "Carlos Alves",
+                                                "email": "carlos@gmail.com",
+                                                "admin": true,
+                                                "createdAt": "18/04/2024",
+                                                "updatedAt": "",
+                                                "deletedAt": ""
+                                            },
+                                            {
+                                                "id": 2,
+                                                "name": "Maria Julia",
+                                                "email": "mariajulia@gmail.com",
+                                                "admin": false,
+                                                "createdAt": "09/04/2024",
+                                                "updatedAt": "",
+                                                "deletedAt": ""
+                                            },
+                                            {
+                                                "id": 3,
+                                                "name": "Amanda Sousa",
+                                                "email": "amanda@gmail.com",
+                                                "admin": true,
+                                                "createdAt": "10/04/2024",
+                                                "updatedAt": "",
+                                                "deletedAt": ""
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {"BearerAuth": []}
+                ]
+            },
+            "post": {
+                "description": "Router responsible for register users.",
+                "tags": ["Router without parameter"],
+                "requestBody": {   
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/CreateUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "$ref": "#/components/schemas/ReadUsers"
+                                },
+                                "examples": {
+                                    "user": {
+                                        "value": {
+                                            "id": 2,
+                                            "name": "Carlos Alves",
+                                            "email": "carlos@gmail.com",
+                                            "admin": true,
+                                            "createdAt": "18/04/2024",
+                                            "updatedAt": "",
+                                            "deletedAt": ""
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "conflictEmailError": {
+                                        "value": {
+                                            "message": "Email user already exists"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{}]
+            }
+        },
+        "/users:id": {
+            "patch": {
+                "description": "The router resposible update just user information.",
+                "tags": ["Router with parameter"],
+                "parameters": [{
+                    "schema": {
+                        "type": "number"
+                    },
+                    "in": "query",
+                    "description": "The Id user you want to search.",
+                    "name": "id"
+                }],
+                "requestBody": {   
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/UpdateUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successfully update user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/UpdateUser"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "id": 2,
+                                            "name": "Carlos Alves",
+                                            "email": "carlos@gmail.com",
+                                            "admin": true,
+                                            "createdAt": "18/04/2024",
+                                            "updatedAt": "20/04/2024",
+                                            "deletedAt": ""
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "conflictEmailError": {
+                                        "value": {
+                                            "message": "Email user already exists"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },   
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "notFoundError": {
+                                        "value": {
+                                            "message": "Not found user."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }                 
+                },
+                "security": [
+                    {"BearerAuth": []}
+                ]
+            },
+            "delete": {
+                "description": "The router resposible delete just user information.",
+                "tags": ["Router with parameter"],
+                "parameters": [{
+                    "schema": {
+                        "type": "number"
+                    },
+                    "in": "query",
+                    "description": "The Id movie you want to search.",
+                    "name": "id"
+                }],
+                "responses":{
+                    "204": {
+                        "description": "No body content"
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "notFoundError": {
+                                        "value": {
+                                            "message": "Not found user."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {"BearerAuth": []}
+                ]
+            }
+        },
+        "/login": {
+            "post": {
+                "description": "Router responsible for login user.",
+                "tags": ["Router without parameter"],
+                "requestBody": {   
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginSession"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Session",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "$ref": "#/components/schemas/LoginSession"
+                                },
+                                "examples": {
+                                    "product": {
+                                        "value": {
+                                            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "conflicBodyError": {
+                                        "value": {
+                                            "message":  "Body invalid"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "conflicEmailPasswordError": {
+                                        "value": {
+                                            "message":  "Wrong email/password"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{}]
+            }
+        },
+        "/categories": {
+            "get": {
+                "description": "Router responsible for searching all categories register.",
+                "tags": ["Router without parameter"],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "value": [
+                                            {
+                                                "id": 1,
+                                                "name": "3 estrelas"
+                                            },
+                                            {
+                                                "id": 2,
+                                                "name": "4 estrelas"
+                                            },
+                                            {
+                                                "id": 3,
+                                                "name": "5 estrelas"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {}
+                ]
+            },
+            "post": {
+                "description": "Router responsible for register categories.",
+                "tags": ["Router without parameter"],
+                "requestBody": {   
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCategory"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "$ref": "#/components/schemas/ReadCategory"
+                                },
+                                "examples": {
+                                    "user": {
+                                        "value": {
+                                            "id": 1,
+                                            "name": "5 estrelas"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "conflictNameError": {
+                                        "value": {
+                                            "message": "Name user already exists"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {"BearerAuth": []}
+                ]
+            }
+        },
+        "/categories/:id/realEstate": {
+            "get": {
+                "description": "Router responsible for searching all realEstates in categories register.",
+                "tags": ["Router with parameter"],
+                "parameters": [{
+                    "schema": {
+                        "type": "number"
+                    },
+                    "in": "query",
+                    "description": "The Id category you want to search.",
+                    "name": "id"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "value": [
+                                            {
+                                                "id": 1,
+                                                "value": 350.00,
+                                                "size": 4,
+                                                "address": {
+                                                    "street": "Avenida Beira mar",
+                                                    "zipCode": "7800-000",
+                                                    "number": 123,
+                                                    "city": "Fortaleza",
+                                                    "State": "Ceará"
+                                                },
+                                                "categoryId": 2
+                                            },
+                                            {
+                                                "id": 2,
+                                                "value": 150.00,
+                                                "size": 2,
+                                                "address": {
+                                                    "street": "Dom Auleriano Matos",
+                                                    "zipCode": "2910-000",
+                                                    "number": 873,
+                                                    "city": "Limoeiro do Norte",
+                                                    "State": "Ceará"
+                                                },
+                                                "categoryId": 2
+                                            },
+                                            {
+                                                "id": 2,
+                                                "value": 150.00,
+                                                "size": 2,
+                                                "address": {
+                                                    "street": "Dom Auleriano Matos",
+                                                    "zipCode": "2910-000",
+                                                    "number": 873,
+                                                    "city": "Limoeiro do Norte",
+                                                    "State": "Ceará"
+                                                },
+                                                "categoryId": 2
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "notFoundError": {
+                                        "value": {
+                                            "message": "Not found category."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }        
+                },
+                "security": [
+                    {}
+                ]
+            }
+        },
+        "/realEstate": {
+            "get": {
+                "description": "Router responsible for searching all realEstates.",
+                "tags": ["Router without parameter"],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "value": [
+                                            {
+                                                "id": 1,
+                                                "value": 350.00,
+                                                "size": 4,
+                                                "address": {
+                                                    "street": "Avenida Dom Aulerian Matos",
+                                                    "zipCode": "4300-000",
+                                                    "number": 983,
+                                                    "city": "Limoeiro do",
+                                                    "State": "Ceará"
+                                                },
+                                                "categoryId": 2,
+                                                "sold": false,
+                                                "createdAt": "10/04/2024",
+                                                "updatedAt": ""
+                                            },
+                                            {
+                                                "id": 2,
+                                                "value": 310.00,
+                                                "size": 2,
+                                                "address": {
+                                                    "street": "Avenida Beira mar",
+                                                    "zipCode": "78000-000",
+                                                    "number": 123,
+                                                    "city": "Fortaleza",
+                                                    "State": "Ceará"
+                                                },
+                                                "categoryId": 2,
+                                                "sold": false,
+                                                "createdAt": "18/04/2024",
+                                                "updatedAt": ""
+                                            },
+                                            {
+                                                "id": 2,
+                                                "value": 280.00,
+                                                "size": 2,
+                                                "address": {
+                                                    "street": "Avenida Manoel Gonçalves",
+                                                    "zipCode": "62920-000",
+                                                    "number": 653,
+                                                    "city": "Quixeré",
+                                                    "State": "Ceará"
+                                                },
+                                                "categoryId": 2,
+                                                "sold": false,
+                                                "createdAt": "02/04/2024",
+                                                "updatedAt": ""
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {}
+                ]
+            },
+            "post": {
+                "description": "Router responsible for register realEstate.",
+                "tags": ["Router without parameter"],
+                "requestBody": {   
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateRealEstate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "$ref": "#/components/schemas/CreateRealEstate"
+                                },
+                                "examples": {
+                                    "realEstate": {
+                                        "value": {
+                                            "id": 2,
+                                            "value": 350.00,
+                                            "size": 4,
+                                            "address": {
+                                                "street": "Avenida Beira mar",
+                                                "zipCode": "7800-000",
+                                                "number": 123,
+                                                "city": "Fortaleza",
+                                                "State": "Ceará"
+                                            },
+                                            "categoryId": 2,
+                                            "sold": false,
+                                            "createdAt": "18/04/2024",
+                                            "updatedAt": ""
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "conflictEmailError": {
+                                        "value": {
+                                            "message": "Address user already exists"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {"BearerAuth": []}
+                ]
+            }
+        },
+        "/schedules": {
+            "post": {
+                "description": "Router responsible for register schedules.",
+                "tags": ["Router without parameter"],
+                "requestBody": {   
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateSchedules"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "$ref": "#/components/schemas/ReadSchedulesRealEstate"
+                                },
+                                "examples": {
+                                    "schedule": {
+                                        "value": {
+                                            "id": 2,
+                                            "date": "18/04/2024",
+                                            "hour": "15:00:00",
+                                            "realEstateId": 2,
+                                            "userId": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "conflictEmailError": {
+                                        "value": {
+                                            "message": "Email user already exists"
+                                        }
+                                    },
+                                    "conflict2SchedulesError": {
+                                        "value": {
+                                            "message": "User already has a reservation in the same location in another property."
+                                        }
+                                    },
+                                    "conflictScheduleTimeError": {
+                                        "value": {
+                                            "message": "There is already a visit scheduled at that time."
+                                        }
+                                    },
+                                    "conflictHourError": {
+                                        "value": {
+                                            "message": "Visit during business hours (08:00 to 18:00)."
+                                        }
+                                    },
+                                    "conflictDayError": {
+                                        "value": {
+                                            "message": "Visit during working days (Monday to Friday)."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{}]
+            }
+        },
+        "/schedules/realEstate/:id": {
+            "get": {
+                "description": "Router responsible for searching all schedules in realEstate register.",
+                "tags": ["Router with parameter"],
+                "parameters": [{
+                    "schema": {
+                        "type": "number"
+                    },
+                    "in": "query",
+                    "description": "The Id realEstate you want to search.",
+                    "name": "id"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "value": [
+                                            {
+                                                "id": 1,
+                                                "date": "18/04/2024",
+                                                "hour": "15:00:00",
+                                                "realEstateId": 2
+                                            },
+                                            {
+                                                "id": 2,
+                                                "date": "18/04/2024",
+                                                "hour": "15:00:00",
+                                                "realEstateId": 2
+                                            },
+                                            {
+                                                "id": 3,
+                                                "date": "18/04/2024",
+                                                "hour": "15:00:00",
+                                                "realEstateId": 2
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "notFoundError": {
+                                        "value": {
+                                            "message": "Not found realEstate."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }        
+                },
+                "security": [
+                    {"BearerAuth": []}
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateUser": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "admin": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "ReadUsers": {
+                "type": "array",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "admin": {
+                        "type": "boolean"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "deteledAt": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UpdateUser": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "LoginSession": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CreateCategory": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ReadCategory": {
+                "type": "array",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ReadCategoryRealEstate": {
+                "type": "array",
+                "properties": {
+                    "realEstateId": {
+                        "type": "number"
+                    },
+                    "value": {
+                        "type": "number"
+                    },
+                    "size": {
+                        "type": "number"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "street": {
+                                "type": "string"
+                            },
+                            "zipCode": {
+                                "type": "string"
+                            },
+                            "number": {
+                                "type": "number"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string"
+                            }
+                        } 
+                    },
+                    "categoryId": {
+                        "type": "number"
+                    },
+                    "sold": {
+                        "type": "boolean"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CreateRealEstate": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "value": {
+                        "type": "number"
+                    },
+                    "size": {
+                        "type": "number"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "street": {
+                                "type": "string"
+                            },
+                            "zipCode": {
+                                "type": "string"
+                            },
+                            "number": {
+                                "type": "number"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string"
+                            }
+                        } 
+                    },
+                    "categoryId": {
+                        "type": "number"
+                    }
+                }
+            },
+            "ReadRealEstate": {
+                "type": "array",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "value": {
+                        "type": "number"
+                    },
+                    "size": {
+                        "type": "number"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "street": {
+                                "type": "string"
+                            },
+                            "zipCode": {
+                                "type": "string"
+                            },
+                            "number": {
+                                "type": "number"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string"
+                            }
+                        } 
+                    },
+                    "categoryId": {
+                        "type": "number"
+                    },
+                    "sold": {
+                        "type": "boolean"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    }
+            }
+            },
+            "CreateSchedules": {
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "type": "string"
+                    },
+                    "hour": {
+                        "type": "string"
+                    },
+                    "realEstateId": {
+                        "type": "number"
+                    }
+                }
+            },
+            "ReadSchedulesRealEstate": {
+                "type": "array",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "date": {
+                        "type": "string"
+                    },
+                    "hour": {
+                        "type": "string"
+                    },
+                    "realEstateId": {
+                        "type": "number"
+                    },
+                    "userId": {
+                        "type": "number"
+                    } 
+                }
+            }
+        },
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security": [
+        {"JWT": []}
+    ]
+}
